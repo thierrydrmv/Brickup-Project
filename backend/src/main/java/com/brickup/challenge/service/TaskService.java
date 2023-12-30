@@ -8,4 +8,6 @@ public interface TaskService {
   public Task addTask(Task task);
   public List<Task> getAllTasks();
   public Optional<Task> updateTask(Long id, Task task);
+
+  public Optional<Task> removeTaskById(Long id);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,17 @@ public class TaskController {
   @PutMapping({"/{id}"})
   public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
     Optional<Task> optionalTask = taskService.updateTask(id, taskDto.toTask());
+
+    if(optionalTask.isEmpty()){
+      ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found");
+    }
+
+    return ResponseEntity.status(HttpStatus.OK).body(optionalTask.orElse(null));
+  }
+
+  @DeleteMapping({"/{id}"})
+  public ResponseEntity<Task> removeTaskById(@PathVariable Long id) {
+    Optional<Task> optionalTask = taskService.removeTaskById(id);
 
     if(optionalTask.isEmpty()){
       ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found");

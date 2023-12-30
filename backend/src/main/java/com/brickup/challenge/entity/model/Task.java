@@ -18,7 +18,7 @@ public class Task {
   public Task() {
   }
 
-  public Task(Long id, String name, String description, String status, Blob image) {
+  public Task(Long id, String name, String description, String status, String image) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -33,7 +33,7 @@ public class Task {
   private String name;
   private String description;
   private String status;
-  private Blob image;
+  private String image;
 
   public Long getId() {
     return id;
@@ -67,11 +67,11 @@ public class Task {
     this.status = status;
   }
 
-  public Blob getImage() {
+  public String getImage() {
     return image;
   }
 
-  public void setImage(Blob image) {
+  public void setImage(String image) {
     this.image = image;
   }
 }

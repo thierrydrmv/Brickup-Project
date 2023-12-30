@@ -37,4 +37,14 @@ public class TaskServiceImp implements TaskService {
     }
     return taskOptional;
   }
+
+  @Override
+  public Optional<Task> removeTaskById(Long id) {
+    Optional<Task> taskOptional = taskRepository.findById(id);
+
+    if(taskOptional.isPresent()) {
+      taskRepository.deleteById(id);
+    }
+    return taskOptional;
+  }
 }
