@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -8,6 +8,7 @@ export default function Task() {
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('pendente');
   const [imageData, setImageData] = useState(null);
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const data = useSelector((state) => state.task)
@@ -18,6 +19,7 @@ export default function Task() {
     headers: {"Content-Type":"application/json"},
     body:JSON.stringify({name, description, status})
   })
+  navigate("/");
   }
 
   const handleEditTask = () => {
@@ -26,6 +28,7 @@ export default function Task() {
     headers: {"Content-Type":"application/json"},
     body:JSON.stringify({name, description, status, imageData})
   })
+  navigate("/");
   }
 
     
@@ -66,7 +69,7 @@ export default function Task() {
           <div className="m-3'">
             <input className='m-3' type="file" accept='image/*' onChange={handleImage}/>
           </div>
-          <Button variant='dark' type="button" disabled={ description.length < 1 ? true : false} onClick={ !id ? handleAddNewTask : handleEditTask}><Link className='text-decoration-none text-white' to="/">Salvar</Link></Button>
+          <Button variant='dark' type="button" disabled={ description.length < 1 ? true : false} onClick={ !id ? handleAddNewTask : handleEditTask}>Salvar</Button>
         </div>
       </form>
     </div>
